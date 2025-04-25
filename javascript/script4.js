@@ -128,7 +128,7 @@
             <img src="${item.image}" alt="${item.name}">
             <div class="item-info">
               ${item.quantity}x ${item.name} – ${formatPrice(item.price)}<br>
-              <small>Size ${item.size} | Total: ${formatPrice(itemTotal)}</small>
+              <small>Taille ${item.size} | Total: ${formatPrice(itemTotal)}</small>
             </div>
             <button class="remove-btn" title="Retirer">✖</button>
           `;
@@ -144,7 +144,7 @@
     
         cartCount.textContent = cartItems;
         cartCount.style.display = cartItems > 0 ? "inline-block" : "none";
-        cartTotal.textContent = `Total Price : ${formatPrice(totalPrice)}`;
+        cartTotal.textContent = `Prix Total : ${formatPrice(totalPrice)}`;
       }
     
       updateCartDisplay();
