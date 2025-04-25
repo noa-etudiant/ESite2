@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Page</title>
+  <link rel="stylesheet" href="/css/style2.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">LOGO</div>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li>
+        <a href="#cart">Cart <span id="cart-count">0</span></a>
+      </li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <div id="cart-panel" class="cart-panel">
+    <h3>🛒 My Cart</h3>
+    <ul id="cart-items" class="cart-items"></ul>
+    <div id="cart-total" class="cart-total">Total Price : $0</div>
+    <button id="checkout-btn" class="checkout-btn">Buy</button>
+  </div>
+
+  <section class="container">
+    <div class="content-wrapper">
+      <div class="images-and-sizes">
+        <div class="image-slider">
+          <div class="slider-container">
+            <img src="/images/short.png" alt="Blue">
+          </div>
+          <div class="slider-buttons">
+            <button class="slider-prev">&#10094;</button>
+            <button class="slider-next">&#10095;</button>
+          </div>
+        </div>
+        <div class="slideshow-buttons">
+          <span class="focus" data-index="0"></span>
+        </div>
+        <p class="pick">CHOOSE SIZE</p>
+        <div class="sizes">
+          <span>S</span>
+          <span>M</span>
+          <span>L</span>
+          <span>XL</span>
+        </div>
+      </div>
+
+      <div class="product">
+        <p class="category">SHORT</p>
+        <h1>Burberry Short</h1>
+        <h2>$39.9</h2>
+        <p class="description">
+          High-quality shorts featuring the iconic check pattern. Comfortable and stylish, perfect for a chic, casual look.</p>
+        <div class="quantity-selector">
+            <button id="decrease">-</button>
+            <span id="quantity">1</span>
+            <button id="increase">+</button>
+          </div>
+        <div class="buttons">
+          <button class="add">ADD TO CART</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="/javascript/script2.js"></script>
+
+</body>
+</html>
