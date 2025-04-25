@@ -90,6 +90,9 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+  // Tester d'abord la disponibilité du stockage
+  testStorageAvailability();
+  
   const cartCount = document.getElementById('cart-count');
   const cartPanel = document.getElementById('cart-panel');
   const cartItemsList = document.getElementById('cart-items');
@@ -100,21 +103,43 @@
     return price.toFixed(2).replace('.', ',') + ' €';
   }
 
-  function loadCart() {
-    try {
-      const stored = localStorage.getItem('myCart');
-      return stored ? JSON.parse(stored) : [];
-    } catch (e) {
-      console.warn("⚠️ localStorage inaccessible", e);
-      return [];
-    }
-  }
-
   function saveCart(cart) {
     try {
       localStorage.setItem('myCart', JSON.stringify(cart));
+      // Vérification immédiate pour confirmer que les données ont été sauvegardées
+      const verification = localStorage.getItem('myCart');
+      if (!verification) {
+        console.warn("⚠️ La sauvegarde paraît avoir échoué - aucune donnée récupérée");
+      }
     } catch (e) {
       console.warn("⚠️ localStorage sauvegarde échouée", e);
+      // Tentative de sauvegarde alternative avec sessionStorage
+      try {
+        sessionStorage.setItem('myCart', JSON.stringify(cart));
+      } catch (e2) {
+        console.error("❌ Impossible de sauvegarder le panier", e2);
+      }
+    }
+  }
+
+  function loadCart() {
+    try {
+      // Tentative principale avec localStorage
+      const stored = localStorage.getItem('myCart');
+      if (stored) {
+        return JSON.parse(stored);
+      }
+      
+      // Si localStorage est vide, essai avec sessionStorage
+      const storedSession = sessionStorage.getItem('myCart');
+      if (storedSession) {
+        return JSON.parse(storedSession);
+      }
+      
+      return [];
+    } catch (e) {
+      console.warn("⚠️ Erreur d'accès au stockage", e);
+      return [];
     }
   }
 
@@ -131,11 +156,16 @@
       const li = document.createElement('li');
       li.setAttribute('data-index', index);
       li.setAttribute('data-quantity', item.quantity);
+      const itemTotal = item.quantity * item.price;
       li.innerHTML = `
-        <img src="${item.image}" alt="Short">
-        <div class="item-info">${item.quantity}x ${item.name}<br><small>Size ${item.size}</small></div>
+        <img src="${item.image}" alt="${item.name}">
+        <div class="item-info">
+          ${item.quantity}x ${item.name} – ${formatPrice(item.price)}<br>
+          <small>Size ${item.size} | Total: ${formatPrice(itemTotal)}</small>
+        </div>
         <button class="remove-btn" title="Retirer">✖</button>
       `;
+
 
       li.querySelector('.remove-btn').addEventListener('click', () => {
         const updatedCart = loadCart();
@@ -174,6 +204,39 @@
     }
   });
 });
+
+function testStorageAvailability() {
+  const testKey = 'test_storage';
+  try {
+    localStorage.setItem(testKey, 'test');
+    if (localStorage.getItem(testKey) === 'test') {
+      localStorage.removeItem(testKey);
+      console.log('✅ localStorage disponible');
+      return true;
+    }
+    return false;
+  } catch (e) {
+    console.warn('⚠️ localStorage indisponible', e);
+    // Afficher une notification à l'utilisateur si le localStorage n'est pas disponible
+    displayStorageWarning();
+    return false;
+  }
+}
+
+function displayStorageWarning() {
+  // Créer une notification pour informer l'utilisateur
+  const warning = document.createElement('div');
+  warning.style.cssText = 'position:fixed; top:10px; left:50%; transform:translateX(-50%); background:#fff3cd; color:#856404; padding:10px 20px; border-radius:5px; box-shadow:0 2px 5px rgba(0,0,0,0.2); z-index:9999; text-align:center;';
+  warning.innerHTML = 'Attention : le stockage local est désactivé ou inaccessible. Votre panier ne sera pas conservé entre les sessions.';
+  document.body.appendChild(warning);
+  
+  // Faire disparaître après 5 secondes
+  setTimeout(() => {
+    warning.style.opacity = '0';
+    warning.style.transition = 'opacity 1s';
+    setTimeout(() => warning.remove(), 1000);
+  }, 5000);
+}
 </script>
 
 

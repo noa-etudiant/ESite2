@@ -115,7 +115,7 @@ nav {
     height: 380px;
     border-radius: 12px;
     transform-style: preserve-3d;
-    text-decoration: none; /* Pour enlever le soulignement du lien */
+    text-decoration: none;
 }
 
 .cards-container {
@@ -231,26 +231,17 @@ nav {
 }
 
 .card:hover .product img {
-    transform: translate3d(-50%, -40%, 80px);
+    transform: translate(-50%, -40%);
 }
 
 .card:hover .product .number {
-    transform: translateZ(40px);
     opacity: 1;
 }
 
 .card:hover .product .sneakers {
-    transform: translateZ(40px);
     opacity: 0.85;
 }
 
-.card:hover .product .price {
-    transform: translateZ(20px);
-}
-
-.card:hover .title h2{
-    transform: translateZ(20px);
-}
 
 .cart-panel {
     position: fixed;
@@ -267,7 +258,7 @@ nav {
     flex-direction: column;
     max-height: 80vh;
     overflow: hidden;
-    text-align: left; /* 🆕 pas centré */
+    text-align: left;
   }
   
   .cart-panel h3 {
@@ -275,7 +266,7 @@ nav {
     margin-bottom: 15px;
     color: var(--dark);
     font-weight: bold;
-    text-align: left; /* 🆕 pas centré */
+    text-align: left;
   }
   
   .cart-items {
@@ -308,7 +299,7 @@ nav {
     flex: 1;
     font-weight: normal;
     color: black;
-    text-align: left; /* 🆕 */
+    text-align: left;
     line-height: 1.4;
     font-size: 14px;
   }
@@ -372,7 +363,7 @@ nav {
   }
 
   #cart-panel {
-    z-index: 9999 !important; /* s'assure qu'il passe au-dessus de tout */
+    z-index: 9999 !important;
   }
 
 
