@@ -7,6 +7,12 @@
     --light-gray: #f3e1e6;
   }
 
+  html, body {
+    overflow-x: hidden;
+    position: relative;
+    z-index: 1;
+  }
+
 * {
     margin: 0;
     padding: 0;
@@ -122,15 +128,15 @@ nav {
 }
 
 .card.blue {
-    background: linear-gradient(135deg, #09AFFF, #125575);
+    background: linear-gradient(135deg, #553925, #eab379);
 }
 
 .card.pink {
-    background: linear-gradient(135deg, #f7afc8, #d73bc7);
+    background: linear-gradient(135deg, #553925, #eab379);
 }
 
 .card.purple {
-    background: linear-gradient(135deg, #976eef, #290987);  
+    background: linear-gradient(135deg, #553925, #eab379);  
 }
 
 .card.red {
@@ -174,8 +180,16 @@ nav {
     pointer-events: none;
 }
 
-.card.red .product img {
+.card.pink .product img {
     height: 220px;
+}
+
+.card.blue .product img {
+    height: 220px;
+}
+
+.card.purple .product img {
+    height: 280px;
 }
 
 .product .price {
@@ -197,15 +211,15 @@ nav {
 }
 
 .card.blue .title {
-    background: #039BE5;
+    background: #6b4b30;
 }
 
 .card.pink .title {
-    background: #f037bc;
+    background: #6b4b30;
 }
 
 .card.purple .title {
-    background: #5B1AE3;
+    background: #6b4b30;
 }
 
 .card.red .title {
@@ -247,31 +261,24 @@ nav {
     border: 1px solid #eee;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     padding: 20px;
-    display: none; /* ✅ Le panneau est caché au chargement */
+    display: none;
     z-index: 999;
     border-radius: 10px;
     flex-direction: column;
     max-height: 80vh;
     overflow: hidden;
+    text-align: left; /* 🆕 pas centré */
   }
-
+  
   .cart-panel h3 {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 15px;
     color: var(--dark);
+    font-weight: bold;
+    text-align: left; /* 🆕 pas centré */
   }
-
-#cart-count {
-    display: none; /* ✅ Caché tant qu’il est vide */
-    background-color: red;
-    color: white;
-    font-size: 12px;
-    padding: 2px 8px;
-    border-radius: 50px;
-    margin-left: 5px;
-}
-
-.cart-items {
+  
+  .cart-items {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -281,27 +288,39 @@ nav {
   
   .cart-items li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     border-bottom: 1px solid #f1f1f1;
     padding: 10px 0;
     font-size: 14px;
-    color: var(--dark);
     position: relative;
+    color: black;
   }
-
+  
   .cart-items img {
     width: 40px;
     height: 40px;
     object-fit: cover;
     border-radius: 5px;
   }
-
+  
   .cart-items .item-info {
     flex: 1;
+    font-weight: normal;
     color: black;
+    text-align: left; /* 🆕 */
+    line-height: 1.4;
+    font-size: 14px;
   }
-
+  
+  .cart-items .item-info small {
+    display: block;
+    font-size: 12px;
+    color: #555;
+    font-weight: normal;
+    margin-top: 2px;
+  }
+  
   .cart-items .remove-btn {
     background: none;
     border: none;
@@ -312,41 +331,51 @@ nav {
     top: 8px;
     right: 0;
   }
-
-  .checkout-btn {
-    display: block;                   /* ✅ Toujours visible */
-    width: 100%;
-    margin-top: 15px;
-    padding: 12px;
-    background-color: black;
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    opacity: 1 !important;           /* ✅ Force l'affichage */
-    visibility: visible !important; /* ✅ Force la visibilité */
+  
+  #cart-count {
+    display: none;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 50px;
+    margin-left: 5px;
   }
   
-#cart-panel .item-info,
-#cart-panel h3,
-#cart-panel #cart-total {
-  color: black;
-}
-  
-.checkout-btn:hover {
-    background-color: #ba7e7e;
-}
-
-.cart-total {
+  .cart-total {
     font-weight: bold;
     font-size: 16px;
     color: var(--dark, black);
     margin-top: 10px;
     text-align: right;
   }
+  
+  .checkout-btn {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  .checkout-btn:hover {
+    background-color: #ba7e7e;
+  }
+
+  #cart-panel {
+    z-index: 9999 !important; /* s'assure qu'il passe au-dessus de tout */
+  }
+
+
 @keyframes torn-paper-float {
     0%, 100% {
         transform: translateY(0);

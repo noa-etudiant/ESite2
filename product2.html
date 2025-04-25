@@ -20,8 +20,8 @@
   <div id="cart-panel" class="cart-panel">
     <h3>🛒 My Cart</h3>
     <ul id="cart-items" class="cart-items"></ul>
-    <div id="cart-total" class="cart-total">Prix total : 0€</div>
-    <button id="checkout-btn" class="checkout-btn">Acheter</button>
+    <div id="cart-total" class="cart-total">Total Price : $0</div>
+    <button id="checkout-btn" class="checkout-btn">Buy</button>
   </div>
 
   <section class="container">
@@ -29,8 +29,9 @@
       <div class="images-and-sizes">
         <div class="image-slider">
           <div class="slider-container">
-            <img src="images/Denim-Pink.png" alt="Pink">
-            <img src="images/Denim-Pink2.png" alt="Pink">
+            <img src="images/sandal.png" alt="Pink">
+            <img src="images/sandal2.png" alt="Pink">
+            <img src="images/sandal3.png" alt="Pink">
           </div>
           <div class="slider-buttons">
             <button class="slider-prev">&#10094;</button>
@@ -40,23 +41,26 @@
         <div class="slideshow-buttons">
           <span class="focus" data-index="0"></span>
           <span data-index="1"></span>
+          <span data-index="2"></span>
         </div>
         <p class="pick">CHOOSE SIZE</p>
         <div class="sizes">
-          <span>S</span>
-          <span>M</span>
-          <span>L</span>
-          <span>XL</span>
+          <span>39</span>
+          <span>40</span>
+          <span>41</span>
+          <span>42</span>
+          <span>43</span>
+          <span>44</span>
+          <span>45</span>
         </div>
       </div>
 
       <div class="product">
-        <p class="category">SHORT DENIM</p>
-        <h1>Denim Short Blue</h1>
+        <p class="category">SANDAL</p>
+        <h1>Burberry Sandal</h1>
         <h2>$39.9</h2>
         <p class="description">
-            The Denim shorts combine style and comfort for an irresistible casual look. Their modern fit and softness make them a must-have for your summer days. Wear them with a T-shirt or shirt for a relaxed and confident look.
-        </p>
+          Iconic slides with a signature check print. Comfort and elegance combine for a stylish everyday look.</p>
         <div class="quantity-selector">
             <button id="decrease">-</button>
             <span id="quantity">1</span>
@@ -187,7 +191,7 @@
   
         cartCount.textContent = cartItems;
         cartCount.style.display = cartItems > 0 ? "inline-block" : "none";
-        cartTotal.textContent = `Prix total : ${formatPrice(totalPrice)}`;
+        cartTotal.textContent = `Total Price : ${formatPrice(totalPrice)}`;
       }
   
       updateCartDisplay();
@@ -201,11 +205,11 @@
         }
   
         const newItem = {
-          name: "Shorts Denim",
+          name: "Sandal",
           size: selectedSize.textContent,
           quantity: quantity,
           price: itemPrice,
-          image: "images/Denim-Pink.png"
+          image: "images/sandal.png"
         };
   
         cartData.push(newItem);
@@ -226,9 +230,9 @@
   
       checkoutBtn?.addEventListener('click', () => {
         if (cartItemsList.children.length === 0) {
-          alert("Votre panier est vide !");
+          alert("Your shopping cart is empty!");
         } else {
-          alert("Merci pour votre commande !");
+          alert("Thank you for your order!");
           cartData = [];
           saveCart(cartData);
           updateCartDisplay();

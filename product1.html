@@ -20,8 +20,8 @@
   <div id="cart-panel" class="cart-panel">
     <h3>🛒 My Cart</h3>
     <ul id="cart-items" class="cart-items"></ul>
-    <div id="cart-total" class="cart-total">Prix total : 0€</div>
-    <button id="checkout-btn" class="checkout-btn">Acheter</button>
+    <div id="cart-total" class="cart-total">Total Price : $0</div>
+    <button id="checkout-btn" class="checkout-btn">Buy</button>
   </div>
 
   <section class="container">
@@ -29,8 +29,7 @@
       <div class="images-and-sizes">
         <div class="image-slider">
           <div class="slider-container">
-            <img src="images/Denim-Blue.png" alt="Blue">
-            <img src="images/Denim-Blue2.png" alt="Blue">
+            <img src="images/short.png" alt="Blue">
           </div>
           <div class="slider-buttons">
             <button class="slider-prev">&#10094;</button>
@@ -39,7 +38,6 @@
         </div>
         <div class="slideshow-buttons">
           <span class="focus" data-index="0"></span>
-          <span data-index="1"></span>
         </div>
         <p class="pick">CHOOSE SIZE</p>
         <div class="sizes">
@@ -51,12 +49,11 @@
       </div>
 
       <div class="product">
-        <p class="category">SHORT DENIM</p>
-        <h1>Denim Short Blue</h1>
+        <p class="category">SHORT</p>
+        <h1>Burberry Short</h1>
         <h2>$39.9</h2>
         <p class="description">
-            The Denim shorts combine style and comfort for an irresistible casual look. Their modern fit and softness make them a must-have for your summer days. Wear them with a T-shirt or shirt for a relaxed and confident look.
-        </p>
+          High-quality shorts featuring the iconic check pattern. Comfortable and stylish, perfect for a chic, casual look.</p>
         <div class="quantity-selector">
             <button id="decrease">-</button>
             <span id="quantity">1</span>
@@ -186,7 +183,7 @@
   
         cartCount.textContent = cartItems;
         cartCount.style.display = cartItems > 0 ? "inline-block" : "none";
-        cartTotal.textContent = `Prix total : ${formatPrice(totalPrice)}`;
+        cartTotal.textContent = `Total Price : ${formatPrice(totalPrice)}`;
       }
   
       updateCartDisplay();
@@ -200,11 +197,11 @@
         }
   
         const newItem = {
-          name: "Shorts Denim",
+          name: "Short",
           size: selectedSize.textContent,
           quantity: quantity,
           price: itemPrice,
-          image: "images/Denim-Blue.png"
+          image: "images/short.png"
         };
   
         cartData.push(newItem);
@@ -225,9 +222,9 @@
   
       checkoutBtn.addEventListener('click', () => {
         if (cartItemsList.children.length === 0) {
-          alert("Votre panier est vide !");
+          alert("Your shopping cart is empty!");
         } else {
-          alert("Merci pour votre commande !");
+          alert("Thank you for your order!");
           cartData = [];
           saveCart(cartData);
           updateCartDisplay();
