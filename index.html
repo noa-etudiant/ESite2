@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<section class="hero">
+  <nav>
+    <div class="logo">LOGO</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="#cart">Cart <span id="cart-count">0</span></a>
+        </li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <div id="cart-panel" class="cart-panel">
+    <h3>🛒 My Cart</h3>
+    <ul id="cart-items" class="cart-items"></ul>
+    <div id="cart-total" class="cart-total">Prix total : 0€</div>
+    <button id="checkout-btn" class="checkout-btn">Acheter</button>
+  </div>
+
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="videos/fond.mp4" type="video/mp4">
+  </video>
+
+  <div class="hero-content">
+    <h3 class="hero-subtitle">The</h3>
+    <h1 class="hero-title">Denim Studio</h1>
+  </div>
+</section>
+
+<div class="cards-container">
+    <div class="card blue">
+      <a href="product1.html" class="card blue">
+      <div class="product">
+        <span class="number">01</span>
+        <span class="sneakers">SHORT</span>
+        <span class="price">$39.9</span>
+        <img src="images/Denim-Blue.png">
+      </div>
+      <div class="title">
+        <h2>Denim Blue</h2>
+      </div>
+      </a>
+    </div>
+    <div class="card pink">
+      <a href="product2.html" class="card pink">
+      <div class="product">
+        <span class="number">02</span>
+        <span class="sneakers">SHORT</span>
+        <span class="price">$39.9</span>
+        <img src="images/Denim-Pink.png">
+      </div>
+      <div class="title">
+        <h2>Denim Pink</h2>
+      </div>
+    </a>
+    </div>
+    <div class="card purple">
+      <a href="product3.html" class="card purple">
+      <div class="product">
+        <span class="number">03</span>
+        <span class="sneakers">SHORT</span>
+        <span class="price">$39.9</span>
+        <img src="images/Denim-Purple.png">
+      </div>
+      <div class="title">
+        <h2>Denim Purple</h2>
+      </div>
+      </a>
+    </div>
+    <div class="card red">
+      <a href="product4.html" class="card red">
+      <div class="product">
+        <span class="number">04</span>
+        <span class="sneakers">SHORT</span>
+        <span class="price">$39.9</span>
+        <img src="images/Denim-Red.png">
+      </div>
+      <div class="title">
+        <h2>Denim Red</h2>
+      </div>
+      </a>
+    </div>
+    <div class="card gray">
+      <a href="product5.html" class="card gray">
+      <div class="product">
+        <span class="number">05</span>
+        <span class="sneakers">SHORT</span>
+        <span class="price">$39.9</span>
+        <img src="images/Denim-Gray.png">
+      </div>
+      <div class="title">
+        <h2>Denim Gray</h2>
+      </div>
+      </a>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        VanillaTilt.init(document.querySelectorAll(".card"), {
+            max: 25,
+            speed: 5000,
+            glare: true,
+            "max-glare": 0.5,
+        });
+    });
+</script>
+
+<script>
+
+    // === PANIER LOCALSTORAGE (affichage uniquement) ===
+    const cartCount = document.getElementById('cart-count');
+    const cartPanel = document.getElementById('cart-panel');
+    const cartItemsList = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    const checkoutBtn = document.getElementById('checkout-btn');
+
+    function formatPrice(price) {
+      return price.toFixed(2).replace('.', ',') + ' €';
+    }
+
+    function loadCart() {
+      const stored = localStorage.getItem('myCart');
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function updateCartDisplay() {
+      const cartData = loadCart();
+      cartItemsList.innerHTML = '';
+      let cartItems = 0;
+      let totalPrice = 0;
+
+      cartData.forEach((item, index) => {
+        cartItems += item.quantity;
+        totalPrice += item.quantity * item.price;
+
+        const li = document.createElement('li');
+        li.setAttribute('data-index', index);
+        li.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="item-info">${item.quantity}x ${item.name}<br><small>Size ${item.size}</small></div>
+          <button class="remove-btn" title="Retirer">✖</button>
+        `;
+
+        li.querySelector('.remove-btn').addEventListener('click', () => {
+          const cartDataUpdated = loadCart();
+          cartDataUpdated.splice(index, 1);
+          localStorage.setItem('myCart', JSON.stringify(cartDataUpdated));
+          updateCartDisplay();
+        });
+
+        cartItemsList.appendChild(li);
+      });
+
+      cartCount.textContent = cartItems;
+      cartCount.style.display = cartItems > 0 ? 'inline-block' : 'none';
+      cartTotal.textContent = `Prix total : ${formatPrice(totalPrice)}`;
+    }
+
+    updateCartDisplay();
+
+    const cartLink = document.querySelector('a[href="#cart"]');
+    if (cartLink) {
+      cartLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        cartPanel.style.display = cartPanel.style.display === 'none' ? 'block' : 'none';
+      });
+    }
+
+    checkoutBtn?.addEventListener('click', () => {
+      const cartData = loadCart();
+      if (cartData.length === 0) {
+        alert("Votre panier est vide !");
+      } else {
+        alert("Merci pour votre commande !");
+        localStorage.setItem('myCart', '[]');
+        updateCartDisplay();
+        cartPanel.style.display = 'none';
+      }
+    });
+</script>
+
+</body>
+</html>

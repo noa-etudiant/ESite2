@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Page</title>
+  <link rel="stylesheet" href="style6.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">LOGO</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li>
+        <a href="#cart">Cart <span id="cart-count">0</span></a>
+      </li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <div id="cart-panel" class="cart-panel">
+    <h3>🛒 My Cart</h3>
+    <ul id="cart-items" class="cart-items"></ul>
+    <div id="cart-total" class="cart-total">Prix total : 0€</div>
+    <button id="checkout-btn" class="checkout-btn">Acheter</button>
+  </div>
+
+  <section class="container">
+    <div class="content-wrapper">
+      <div class="images-and-sizes">
+        <div class="image-slider">
+          <div class="slider-container">
+            <img src="images/Denim-Gray.png" alt="Gray">
+            <img src="images/Denim-Gray2.png" alt="Gray">
+          </div>
+          <div class="slider-buttons">
+            <button class="slider-prev">&#10094;</button>
+            <button class="slider-next">&#10095;</button>
+          </div>
+        </div>
+        <div class="slideshow-buttons">
+          <span class="focus" data-index="0"></span>
+          <span data-index="1"></span>
+        </div>
+        <p class="pick">CHOOSE SIZE</p>
+        <div class="sizes">
+          <span>S</span>
+          <span>M</span>
+          <span>L</span>
+          <span>XL</span>
+        </div>
+      </div>
+
+      <div class="product">
+        <p class="category">SHORT DENIM</p>
+        <h1>Denim Short Blue</h1>
+        <h2>$39.9</h2>
+        <p class="description">
+            The Denim shorts combine style and comfort for an irresistible casual look. Their modern fit and softness make them a must-have for your summer days. Wear them with a T-shirt or shirt for a relaxed and confident look.
+        </p>
+        <div class="quantity-selector">
+            <button id="decrease">-</button>
+            <span id="quantity">1</span>
+            <button id="increase">+</button>
+          </div>
+        <div class="buttons">
+          <button class="add">ADD TO CART</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // === SLIDER ===
+      const sliderContainer = document.querySelector('.slider-container');
+      const slideshowButtons = document.querySelectorAll('.slideshow-buttons span');
+      const prevButton = document.querySelector('.slider-prev');
+      const nextButton = document.querySelector('.slider-next');
+      const totalSlides = document.querySelectorAll('.slider-container img').length;
+      let currentSlide = 0;
+  
+      function updateSlider() {
+        sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        slideshowButtons.forEach((button, index) => {
+          button.classList.toggle('focus', index === currentSlide);
+        });
+      }
+  
+      prevButton?.addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+      });
+  
+      nextButton?.addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+      });
+  
+      slideshowButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          currentSlide = index;
+          updateSlider();
+        });
+      });
+  
+      // === SIZES ===
+      const sizeSpans = document.querySelectorAll('.sizes span');
+      sizeSpans.forEach(span => {
+        span.addEventListener('click', () => {
+          sizeSpans.forEach(s => s.classList.remove('focus'));
+          span.classList.add('focus');
+        });
+      });
+  
+      // === QUANTITY ===
+      let quantity = 1;
+      const quantityDisplay = document.getElementById('quantity');
+      const increaseBtn = document.getElementById('increase');
+      const decreaseBtn = document.getElementById('decrease');
+  
+      increaseBtn?.addEventListener('click', () => {
+        quantity++;
+        quantityDisplay.textContent = quantity;
+      });
+  
+      decreaseBtn?.addEventListener('click', () => {
+        if (quantity > 1) {
+          quantity--;
+          quantityDisplay.textContent = quantity;
+        }
+      });
+  
+      // === PANIER ===
+      const addButton = document.querySelector('.add');
+      const cartCount = document.getElementById('cart-count');
+      const cartPanel = document.getElementById('cart-panel');
+      const cartItemsList = document.getElementById('cart-items');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      const cartTotal = document.getElementById('cart-total');
+      cartPanel.style.display = 'none';
+  
+      const itemPrice = 39.9;
+      let cartItems = 0;
+      let totalPrice = 0;
+  
+      function formatPrice(price) {
+        return price.toFixed(2).replace('.', ',') + ' €';
+      }
+  
+      function saveCart(cart) {
+        localStorage.setItem('myCart', JSON.stringify(cart));
+      }
+  
+      function loadCart() {
+        const stored = localStorage.getItem('myCart');
+        return stored ? JSON.parse(stored) : [];
+      }
+  
+      let cartData = loadCart();
+  
+      function updateCartDisplay() {
+        cartItemsList.innerHTML = '';
+        cartItems = 0;
+        totalPrice = 0;
+  
+        cartData.forEach((item, index) => {
+          cartItems += item.quantity;
+          totalPrice += item.quantity * item.price;
+  
+          const li = document.createElement('li');
+          li.setAttribute('data-index', index);
+          li.setAttribute('data-quantity', item.quantity);
+          li.innerHTML = `
+            <img src="${item.image}" alt="Short">
+            <div class="item-info">${item.quantity}x ${item.name}<br><small>Size ${item.size}</small></div>
+            <button class="remove-btn" title="Retirer">✖</button>
+          `;
+  
+          li.querySelector('.remove-btn').addEventListener('click', () => {
+            cartData.splice(index, 1);
+            saveCart(cartData);
+            updateCartDisplay();
+          });
+  
+          cartItemsList.appendChild(li);
+        });
+  
+        cartCount.textContent = cartItems;
+        cartCount.style.display = cartItems > 0 ? "inline-block" : "none";
+        cartTotal.textContent = `Prix total : ${formatPrice(totalPrice)}`;
+      }
+  
+      updateCartDisplay();
+  
+      addButton?.addEventListener('click', (e) => {
+        const selectedSize = document.querySelector('.sizes .focus');
+        if (!selectedSize) {
+          e.preventDefault();
+          alert("Please select a size before adding to cart.");
+          return;
+        }
+  
+        const newItem = {
+          name: "Shorts Denim",
+          size: selectedSize.textContent,
+          quantity: quantity,
+          price: itemPrice,
+          image: "images/Denim-Gray.png"
+        };
+  
+        cartData.push(newItem);
+        saveCart(cartData);
+        updateCartDisplay();
+  
+        quantity = 1;
+        quantityDisplay.textContent = quantity;
+      });
+  
+      const cartLink = document.querySelector('a[href="#cart"]');
+      if (cartLink) {
+        cartLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          cartPanel.style.display = cartPanel.style.display === 'none' ? 'block' : 'none';
+        });
+      }
+  
+      checkoutBtn?.addEventListener('click', () => {
+        if (cartItemsList.children.length === 0) {
+          alert("Votre panier est vide !");
+        } else {
+          alert("Merci pour votre commande !");
+          cartData = [];
+          saveCart(cartData);
+          updateCartDisplay();
+          cartPanel.style.display = 'none';
+        }
+      });
+    });
+  </script>
+  
+  
+  
+</body>
+</html>
