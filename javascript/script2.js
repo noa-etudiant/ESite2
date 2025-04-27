@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const selectedSize = document.querySelector('.sizes .focus');
         if (!selectedSize) {
           e.preventDefault();
-          alert("Please select a size before adding to cart.");
+          alert("Veuillez sélectionner une taille avant d'ajouter au panier.");
           return;
         }
   
@@ -217,13 +217,9 @@ document.addEventListener('DOMContentLoaded', function () {
   
       checkoutBtn.addEventListener('click', () => {
         if (cartItemsList.children.length === 0) {
-          alert("Your shopping cart is empty!");
+          alert("Votre panier est vide!");
         } else {
-          alert("Thank you for your order!");
-          cartData = [];
-          saveCart(cartData);
-          updateCartDisplay();
-          cartPanel.style.display = 'none';
+          window.location.href = '/pages/panier.html';
         }
       });
     });

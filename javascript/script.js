@@ -111,12 +111,9 @@ type="text/javascript">
   checkoutBtn.addEventListener('click', () => {
     const cartData = loadCart();
     if (cartData.length === 0) {
-      alert("Your shopping cart is empty!");
+      alert("Votre panier est vide!");
     } else {
-      alert("Thank you for your order!");
-      saveCart([]);
-      updateCartDisplay();
-      cartPanel.style.display = 'none';
+      window.location.href = '/pages/panier.html';
     }
   });
 });
