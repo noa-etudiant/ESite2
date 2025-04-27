@@ -162,7 +162,7 @@
           size: selectedSize.textContent,
           quantity: quantity,
           price: itemPrice,
-          image: "/images/doudoune.png"
+          image: "/ESite2/images/doudoune.png"
         };
     
         cartData.push(newItem);
@@ -185,7 +185,7 @@
         if (cartItemsList.children.length === 0) {
           alert("Votre panier est vide!");
         } else {
-          window.location.href = '/pages/panier.html';
+          window.location.href = '/ESite2/pages/panier.html';
         }
       });
     });

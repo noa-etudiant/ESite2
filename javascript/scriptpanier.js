@@ -103,9 +103,7 @@ function loadCartItems() {
         if (cartItems.length === 0) {
           alert('Votre panier est vide!');
         } else {
-          alert('Commande validée! Redirection vers le paiement...');
-          // Ici vous pourriez rediriger vers une page de paiement
-          // window.location.href = '/pages/payment.html';
+          window.location.href = '/ESite2/pages/formulaire.html';
         }
       });
     }

@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
       size: selectedSize.textContent,
       quantity: quantity,
       price: itemPrice,
-      image: "/images/sandal.png"
+      image: "/ESite2/images/sandal.png"
     };
 
     cartData.push(newItem);
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (cartItemsList.children.length === 0) {
       alert("Votre panier est vide!");
     } else {
-      window.location.href = '/pages/panier.html';
+      window.location.href = '/ESite2/pages/panier.html';
     }
   });
 });

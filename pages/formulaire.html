@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulaire de Livraison</title>
+  <link rel="stylesheet" href="../css/style2.css">
+  <link rel="stylesheet" href="../css/stylepanier.css">
+  <link rel="stylesheet" href="../css/styleform.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">LOGO</div>
+        <ul class="nav-links">
+          <li><a href="../index.html">Boutique</a></li>
+          <li><a href="#">À propos</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <div id="cart-panel" class="cart-panel">
+        <h3>🛒 Mon panier</h3>
+        <ul id="cart-items" class="cart-items"></ul>
+        <div id="cart-total" class="cart-total">Prix Total: 0€</div>
+        <button id="checkout-btn" class="checkout-btn">Voir le panier</button>
+      </div>
+
+      <h2>Formulaire de Livraison</h2>
+
+      <form action="../php/enregistrer.php" method="POST" class="formulaire">
+      
+        <div class="section">
+          <label>Nom complet</label>
+          <div class="double">
+            <input type="text" name="prenom" placeholder="Prénom" required>
+            <input type="text" name="nom" placeholder="Nom de famille" required>
+          </div>
+        </div>
+      
+        <div class="section">
+          <label>Adresse</label>
+          <input type="text" name="adresse1" placeholder="Adresse rue" required>
+          <input type="text" name="adresse2" placeholder="Adresse rue (2ᵉ ligne) - Optionnel">
+          <div class="triple">
+            <input type="text" name="ville" placeholder="Ville" required>
+            <input type="text" name="region" placeholder="Pays" required>
+            <input type="text" name="code_postal" placeholder="Code Postal" required>
+          </div>
+        </div>
+      
+        <div class="section">
+          <label>Courriel</label>
+          <input type="email" name="email" placeholder="ex: nom@exemple.com" required>
+        </div>
+      
+        <div class="section">
+          <label>Téléphone</label>
+          <div class="double">
+            <input type="text" name="indicatif" placeholder="+33" required>
+            <input type="text" name="telephone" placeholder="ex: 06 83 23 33 00" required>
+          </div>
+        </div>
+      
+        <button type="submit">Continuer</button>
+      
+      </form>
+
+<footer class="footer">
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+    </div>
+    
+    <div class="nav-links2">
+        <a href="../index.html">Home</a>
+        <a href="../pages/mentions-legales.html">Mentions Légales</a>
+        <a href="../pages/CGV.html">Conditions Générales</a>
+        <a href="../pages/Politique-de-Confidentialité.html">Politique de confidentialité</a>
+    </div>
+    
+    <div class="copyright">
+      Ma boutique © 2025
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+  <script src="../javascript/script2.js"></script>
+
+</body>
+</html>

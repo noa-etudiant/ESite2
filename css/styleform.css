@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 20px;
+  }
+  
+  .formulaire {
+    background: white;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .double {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .double input {
+    width: 100%;
+  }
+  
+  .triple {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .triple input {
+    width: 100%;
+  }
+  
+  button {
+    width: 100%;
+    background-color: green;
+    color: white;
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: darkgreen;
+  }
+  

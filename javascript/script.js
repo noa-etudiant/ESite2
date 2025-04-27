@@ -113,7 +113,7 @@ type="text/javascript">
     if (cartData.length === 0) {
       alert("Votre panier est vide!");
     } else {
-      window.location.href = '/pages/panier.html';
+      window.location.href = 'pages/panier.html';
     }
   });
 });
