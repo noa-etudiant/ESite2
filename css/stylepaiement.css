@@ -1,0 +1,227 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5f5;
+    color: #4e4e4e;
+    padding-top: 100px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2 {
+    text-align: center;
+    margin: 30px 0;
+    color: #4e4e4e;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+.resume-commande {
+    width: 90% !important;
+    background: white;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.resume-commande p {
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.resume-commande strong {
+    color: #a0795a;
+    font-weight: 600;
+}
+
+#resume-panier {
+    width: 90% !important;
+    background: white;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    list-style: none;
+}
+
+#resume-panier li {
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.product-details {
+    flex: 1;
+}
+
+.product-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.product-details p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.product-details .item-total {
+    font-weight: bold;
+    color: #a0795a;
+    margin-top: 8px;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #888;
+    padding: 30px 0;
+}
+
+#resume-panier li:last-child {
+    border-bottom: none;
+}
+
+#resume-panier img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+}
+
+.item-info p {
+    margin: 0;
+    color: #888;
+    font-size: 14px;
+}
+
+#total-panier {
+    text-align: right;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #a0795a;
+    padding: 0 30px;
+}
+
+#paypal-button-container {
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+form[action="../php/valider_commande.php"] {
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+form[action="../php/valider_commande.php"] button {
+    width: 100%;
+    padding: 16px;
+    background-color: #a0795a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form[action="../php/valider_commande.php"] button:hover {
+    background-color: #8a6a4f;
+}
+
+.footer {
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    .resume-commande, #resume-panier {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 28px;
+    }
+    
+    h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 80px;
+    }
+    
+    .resume-commande p {
+        font-size: 14px;
+    }
+    
+    #resume-panier img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+    
+    .item-info h3 {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-item-container {
+        gap: 12px;
+    }
+    
+    .product-image {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .product-details h3 {
+        font-size: 14px;
+    }
+    
+    .product-details p {
+        font-size: 13px;
+    }
+}

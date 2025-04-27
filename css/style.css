@@ -11,6 +11,7 @@
     overflow-x: hidden;
     position: relative;
     z-index: 1;
+    width: 100%;
   }
 
   * {
@@ -40,8 +41,9 @@ nav {
     align-items: center;
     z-index: 100;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow: hidden;
   }
 
 .logo {
@@ -55,6 +57,7 @@ nav {
     margin: 0;
     padding: 0;
     white-space: nowrap;
+    justify-content: center;
 }
 
 .nav-links li {
@@ -459,12 +462,18 @@ nav {
 }
 
 @media (max-width: 768px) {
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
     .nav-links a {
-        font-size: 2.5vw;
+        font-size: 14px;
         padding: 0.5rem;
     }
 
     .nav-links li {
-        margin-left: 0.5rem;
+        margin: 0.5rem;
     }
 }
